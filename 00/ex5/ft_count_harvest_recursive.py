@@ -6,7 +6,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/01/30 00:40:42 by somenvie            #+#    #+#            #
-#   Updated: 2026/01/30 02:31:50 by somenvie           ###   ########.fr      #
+#   Updated: 2026/01/30 02:51:47 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -19,7 +19,10 @@ def recursive(x, days):
 
 def ft_count_harvest_recursive():
     days = int(input("Days until harvest: "))
-    if days <= 0:
+    if days == 0:
+        print("Harvest time!")
+        return
+    elif days < 0:
         print("Invalid value")
         return
     x = 1

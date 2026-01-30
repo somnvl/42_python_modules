@@ -6,10 +6,10 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/01/29 19:50:34 by somenvie            #+#    #+#            #
-#   Updated: 2026/01/30 02:15:38 by somenvie           ###   ########.fr      #
+#   Updated: 2026/01/30 03:01:14 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 
 def ft_hello_garden():
-    print("\033[1;5;31;mHello, Garden Community!")
+    print("\033[1;5;31;mHello, Garden Community!\033[0m")
