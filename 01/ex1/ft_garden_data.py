@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # ########################################################################### #
 #                                                                             #
 #                                                          :::      ::::::::  #
@@ -10,3 +12,25 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Program that displays information for each garden plant."""
+
+
+class Plant:
+    """Represent a plant with name, height and age."""
+
+    def __init__(self, name: str, height: int, age: int) -> None:
+        self.name = name
+        self.height = height
+        self.age = age
+
+
+if __name__ == "__main__":
+    plants = [
+        Plant("Rose", 25, 30),
+        Plant("Sunflower", 80, 45),
+        Plant("Cactus", 15, 120),
+        Plant("Lily of the Valley", 10, 5),
+    ]
+    print("=== Garden Plant Registry ===")
+    for plant in plants:
+        print(f"{plant.name}: {plant.height}cm, {plant.age} days old")

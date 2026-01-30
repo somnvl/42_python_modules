@@ -6,7 +6,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/01/30 01:41:14 by somenvie            #+#    #+#            #
-#   Updated: 2026/01/30 03:05:26 by somenvie           ###   ########.fr      #
+#   Updated: 2026/01/30 20:45:46 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -20,4 +20,4 @@ def ft_seed_inventory(seed_type: str, quantity: int, unint: str) -> None:
     elif unint == "area":
         print(f"{seed_type} seeds: covers {quantity} square meters")
     else:
-        print("\033[1;5;31;mUnkown unit typeprint\033[0m")
+        print("\033[1;5;31;mUnkown unit type\033[0m")
