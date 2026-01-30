@@ -1,25 +1,12 @@
 # ########################################################################### #
 #                                                                             #
 #                                                          :::      ::::::::  #
-#   ft_count_harvest_iterative.py                        :+:      :+:    :+:  #
+#   ft_garden_analytics.py                               :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/01/30 00:41:12 by somenvie            #+#    #+#            #
-#   Updated: 2026/01/30 18:25:43 by somenvie           ###   ########.fr      #
+#   Created: 2026/01/30 05:27:50 by somenvie            #+#    #+#            #
+#   Updated: 2026/01/30 05:27:51 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-
-def ft_count_harvest_iterative():
-    days = int(input("Days until harvest: "))
-    if days < 0:
-        print("\033[1;5;31;mInvalid value\033[0m")
-        return
-    elif days == 0:
-        print("\033[1;5;31;mHarvest time!\033[0m")
-        return
-    else:
-        for x in range(1, days + 1, 1):
-            print("Day", x)
-        print("\033[1;5;31;mHarvest time!\033[0m")
