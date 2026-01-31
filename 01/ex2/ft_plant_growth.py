@@ -18,10 +18,10 @@
 class Plant:
     """Represent a plant with name, height and age."""
 
-    def __init__(self, name: str, height: int, plant_age: int) -> None:
+    def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
         self.height = height
-        self.plant_age = plant_age
+        self._age = age
 
     def grow(self, amount: int) -> None:
         """Increase the plant height by the given amount in cm."""
@@ -29,11 +29,11 @@ class Plant:
 
     def age(self, days: int) -> None:
         """Increase the plant age by the given number of days."""
-        self.plant_age += days
+        self._age += days
 
     def get_info(self) -> str:
         """Return a formatted description of the plant."""
-        return f"{self.name}: {self.height}cm, {self.plant_age} days old"
+        return f"{self.name}: {self.height}cm, {self._age} days old"
 
 
 if __name__ == "__main__":
@@ -44,21 +44,18 @@ if __name__ == "__main__":
         Plant("Lily of the Valley", 10, 5),
     ]
 
+    p = 0
+    initial_height = plants[p].height
+
     print("=== Day 1 ===")
-    for plant in plants:
-        print(plant.get_info())
+    print(plants[p].get_info())
 
-    total_growth = 0
     for _ in range(6):
-        for plant in plants:
-            plant.grow(1)
-            plant.age(1)
-            total_growth += 1
+        plants[p].grow(1)
+        plants[p].age(1)
 
-    print()
     print("=== Day 7 ===")
-    for plant in plants:
-        print(plant.get_info())
+    print(plants[p].get_info())
 
-    print()
-    print(f"Growth this week: {total_growth}cm")
+    growth = plants[p].height - initial_height
+    print(f"Growth this week: +{growth}cm")
