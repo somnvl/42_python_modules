@@ -12,7 +12,7 @@
 #                                                                             #
 # ########################################################################### #
 
-""""""
+"""Program demonstrating streamlined plant creation."""
 
 
 class Plant:
@@ -46,10 +46,11 @@ if __name__ == "__main__":
     ]
 
     print("=== Plant Factory Output ===")
-    i = 0
+
+    count = 0
     for plant in plants:
         print(plant.get_info())
-        i += 1
+        count += 1
 
     print()
-    print(f"Total plants crated: {i}")
+    print(f"Total plants created: {count}")
