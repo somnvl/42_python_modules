@@ -44,7 +44,7 @@ if __name__ == "__main__":
         Plant("Lily of the Valley", 10, 5),
     ]
 
-    p = 2
+    p = 0
     initial_height = plants[p].height
 
     print("=== Day 1 ===")
