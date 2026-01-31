@@ -44,15 +44,16 @@ if __name__ == "__main__":
         Plant("Lily of the Valley", 10, 5),
     ]
 
-    p = 0
+    p = 2
     initial_height = plants[p].height
 
     print("=== Day 1 ===")
     print(plants[p].get_info())
 
     for _ in range(6):
-        plants[p].grow(1)
-        plants[p].age(1)
+        for plant in plants:
+            plant.grow(1)
+            plant.age(1)
 
     print("=== Day 7 ===")
     print(plants[p].get_info())
