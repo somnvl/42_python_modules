@@ -52,7 +52,13 @@ class Flower(Plant):
 class Tree(Plant):
     """A tree with trunk diameter attribute."""
 
-    def __init__(self, name: str, height: int, age: int, trunk_diameter: int) -> None:
+    def __init__(
+        self,
+        name: str,
+        height: int,
+        age: int,
+        trunk_diameter: int
+    ) -> None:
         """Initialize a tree with trunk diameter."""
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
