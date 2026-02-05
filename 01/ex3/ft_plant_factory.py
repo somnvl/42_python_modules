@@ -18,10 +18,10 @@
 class Plant:
     """Represent a plant with name, height and age."""
 
-    def __init__(self, name: str, height: int, plant_age: int) -> None:
+    def __init__(self, name: str, height: int, _age: int) -> None:
         self.name = name
         self.height = height
-        self.plant_age = plant_age
+        self._age = _age
 
     def grow(self, amount: int) -> None:
         """Increase the plant height by the given amount in cm."""
@@ -29,11 +29,11 @@ class Plant:
 
     def age(self, days: int) -> None:
         """Increase the plant age by the given number of days."""
-        self.plant_age += days
+        self._age += days
 
     def get_info(self) -> str:
         """Return a formatted description of the plant."""
-        return f"Created: {self.name} ({self.height}cm, {self.plant_age} days)"
+        return f"Created: {self.name} ({self.height}cm, {self._age} days)"
 
 
 if __name__ == "__main__":

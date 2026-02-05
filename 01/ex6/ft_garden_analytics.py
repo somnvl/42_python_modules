@@ -20,7 +20,7 @@ class Plant:
 
     def __init__(self, name: str, height: int, age: int) -> None:
         """Initialize a plant with name, height and age."""
-        self.name = str.title(name)
+        self.name = name
         self.height = height
         self.age = age
 
@@ -67,21 +67,22 @@ class PrizeFlower(FloweringPlant):
 class Garden:
     """Represents a garden containing plants."""
 
-    _validate = 0
-
     def __init__(self, name: str) -> None:
         """Initialize a garden with a name."""
-        self.name = str.title(name)
+        self.name = name
         self.plants = []
         self.growth = 0
+        self._validate = 0
 
-    def add_plant(self, plant: Plant) -> None:
-        """Add a plant to the garden."""
+    def add_plant(self, plant: Plant, verbose: bool = True) -> None:
+        """Add a plant to the garden, optionally printing status messages."""
         if not GardenManager.validate_height(plant.height):
-            print(f"Error: Invalid height ({plant.height}) !")
+            if verbose:
+                print(f"Error: Invalid height ({plant.height}) !")
             self._validate = 1
-        else:
-            self.plants.append(plant)
+            return
+        self.plants.append(plant)
+        if verbose:
             print(f"Added {plant.name} to {self.name}'s garden")
 
     def grow_all(self, amount: int) -> None:
@@ -130,7 +131,7 @@ class GardenManager:
         self.gardens.append(Garden(name))
 
     @classmethod
-    def create_garden_network(cls, names: list) -> "GardenManager":
+    def create_garden_network(cls, names: list[str]) -> "GardenManager":
         """Create a manager with multiple gardens."""
         manager = cls()
         for name in names:
@@ -186,9 +187,9 @@ class GardenManager:
 
         def garden_stats(self) -> None:
             """Display all garden statistics."""
-            print(f"{self.error_check()}")
-            print(f"{self.garden_scores()}")
-            print(f"{self.total_gardens()}")
+            print(self.error_check())
+            print(self.garden_scores())
+            print(self.total_gardens())
 
 
 if __name__ == "__main__":
@@ -198,17 +199,15 @@ if __name__ == "__main__":
     manager = GardenManager.create_garden_network(["Alice", "Bob"])
 
     alice = manager.gardens[0]
-    alice.add_plant(Plant("oak tree", 100, 365))
-    alice.add_plant(FloweringPlant("rose", 25, 30, "red"))
-    alice.add_plant(PrizeFlower("sunflower", 50, 45, "yellow", 10))
+    alice.add_plant(Plant("Oak Tree", 100, 365))
+    alice.add_plant(FloweringPlant("Rose", 25, 30, "red"))
+    alice.add_plant(PrizeFlower("Sunflower", 50, 45, "yellow", 10))
     alice.grow_all(1)
     alice.get_report()
 
     bob = manager.gardens[1]
-    bob.plants = [
-        Plant("oak tree", 70, 95),
-        FloweringPlant("rose", 22, 26, "red")
-    ]
+    bob.add_plant(Plant("Oak Tree", 70, 95), verbose=False)
+    bob.add_plant(FloweringPlant("Rose", 22, 26, "red"), verbose=False)
 
     stats = GardenManager.GardenStats(manager)
     stats.garden_stats()

@@ -16,11 +16,11 @@
 
 if __name__ == "__main__":
     plant = "Lily of the Valley"
-    height = "10cm"
-    age = "5 days"
+    height = 10
+    age = 5
     print("=== Welcome to My Garden ===")
     print(f"Plant: {plant}")
-    print(f"Height: {height}")
-    print(f"Age: {age}")
+    print(f"Height: {height}cm")
+    print(f"Age: {age} days")
     print()
     print("=== End of Program ===")

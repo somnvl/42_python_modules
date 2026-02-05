@@ -53,11 +53,7 @@ class Tree(Plant):
     """A tree with trunk diameter attribute."""
 
     def __init__(
-        self,
-        name: str,
-        height: int,
-        age: int,
-        trunk_diameter: int
+        self, name: str, height: int, age: int, trunk_diameter: int
     ) -> None:
         """Initialize a tree with trunk diameter."""
         super().__init__(name, height, age)
@@ -96,7 +92,8 @@ class Vegetable(Plant):
         """Return vegetable information with harvest season."""
         return (
             f"{self.name} (Vegetable): {self.height}cm, {self.age} days, "
-            f"{self.harvest_season} harvest"
+            f"{self.harvest_season} harvest\n"
+            f"{self.name} is rich in {self.nutritional_value}"
         )
 
 
@@ -131,5 +128,4 @@ if __name__ == "__main__":
 
     for vegetable in vegetables:
         print(vegetable.get_info())
-        print(f"{vegetable.name} is rich in {vegetable.nutritional_value}")
         print()

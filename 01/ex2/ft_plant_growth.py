@@ -21,19 +21,19 @@ class Plant:
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
         self.height = height
-        self._age = age
+        self.age = age
 
     def grow(self, amount: int) -> None:
         """Increase the plant height by the given amount in cm."""
         self.height += amount
 
-    def age(self, days: int) -> None:
+    def age_plant(self, days: int) -> None:
         """Increase the plant age by the given number of days."""
-        self._age += days
+        self.age += days
 
     def get_info(self) -> str:
         """Return a formatted description of the plant."""
-        return f"{self.name}: {self.height}cm, {self._age} days old"
+        return f"{self.name}: {self.height}cm, {self.age} days old"
 
 
 if __name__ == "__main__":
@@ -46,14 +46,15 @@ if __name__ == "__main__":
 
     p = 0
     initial_height = plants[p].height
+    initial_age = plants[p].age
 
-    print("=== Day 1 ===")
+    print("=== Day 0 ===")
     print(plants[p].get_info())
 
     for _ in range(6):
         for plant in plants:
             plant.grow(1)
-            plant.age(1)
+            plant.age_plant(1)
 
     print("=== Day 7 ===")
     print(plants[p].get_info())
