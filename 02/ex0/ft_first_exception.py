@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 # ########################################################################### #
 #                                                                             #
 #                                                          :::      ::::::::  #
@@ -12,7 +13,11 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Agricultural data validation pipeline with exception handling."""
+
+
 def check_temperature(temp_str: str) -> int | None:
+    """Validates temperature string for plant range (0-40°C)."""
     try:
         temp = int(temp_str)
         if temp < 0:
@@ -30,6 +35,7 @@ def check_temperature(temp_str: str) -> int | None:
 
 
 def test_temperature_input() -> None:
+    """Tests temperature validation with various inputs."""
     print("Testing temperature: 25")
     check_temperature("25")
     print("Testing temperature: abc")
