@@ -51,6 +51,7 @@ def garden_operations() -> None:
 
 def test_error_types() -> None:
     """Tests multiple error handling with single except block."""
+
     garden_operations()
 
     print("Testing multiple errors together...")
