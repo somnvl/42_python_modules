@@ -36,7 +36,8 @@ def garden_operations() -> None:
     print("Testing FileNotFoundError...")
     file = "missing.txt"
     try:
-        open(file)
+        f = open(file)
+        f.close()
     except FileNotFoundError:
         print(f"Caught FileNotFoundError: No such file '{file}'\n")
 
@@ -62,9 +63,6 @@ def test_error_types() -> None:
 
 
 if __name__ == "__main__":
-    try:
-        print("=== Garden Error Types Demo ===\n")
-        test_error_types()
-        print("All error types tested successfully!")
-    except Exception as e:
-        print(f"\nCritical error: {type(e).__name__}: {e}")
+    print("=== Garden Error Types Demo ===\n")
+    test_error_types()
+    print("All error types tested successfully!")
