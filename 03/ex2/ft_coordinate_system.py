@@ -12,7 +12,10 @@
 #                                                                             #
 # ########################################################################### #
 
-"""Position Tracker - Exercise 2: 3D coordinates with tuples"""
+"""
+Position Tracker - Exercise 2
+3D coordinates with tuples
+"""
 
 import math
 

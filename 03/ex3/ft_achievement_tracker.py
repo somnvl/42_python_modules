@@ -12,7 +12,10 @@
 #                                                                             #
 # ########################################################################### #
 
-"""Achievement Hunter - Exercise 3: Track unique achievements with sets"""
+"""
+Achievement Hunter - Exercise 3
+Track unique achievements with sets
+"""
 
 if __name__ == "__main__":
     print("=== Achievement Tracker System ===\n")
