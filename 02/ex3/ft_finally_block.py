@@ -45,6 +45,7 @@ def test_watering_system() -> None:
     if error == 0:
         print("Watering completed successfully!")
 
+    error = 0
     try:
         print("\nTesting with error...")
         water_plants(["tomato", "", "carrots"])

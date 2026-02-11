@@ -17,21 +17,8 @@
 if __name__ == "__main__":
     print("=== Achievement Tracker System ===\n")
 
-    # Alice achievements
-    alice = {
-        "first_kill",
-        "level_10",
-        "treasure_hunter",
-        "speed_demon"
-    }
-    # Bob achievements
-    bob = {
-        "first_kill",
-        "level_10",
-        "boss_slayer",
-        "collector"
-    }
-    # Charlie achievements
+    alice = {"first_kill", "level_10", "treasure_hunter", "speed_demon"}
+    bob = {"first_kill", "level_10", "boss_slayer", "collector"}
     charlie = {
         "level_10",
         "treasure_hunter",
@@ -44,28 +31,21 @@ if __name__ == "__main__":
     print(f"Player bob achievements: {bob}")
     print(f"Player charlie achievements: {charlie}")
 
-    print("=== Achievement Analytics ===\n")
+    print("\n=== Achievement Analytics ===")
 
-    # 1. All unique achievements (UNION)
     all_achievements = alice.union(bob).union(charlie)
     print(f"All unique achievements: {all_achievements}")
     print(f"Total unique achievements: {len(all_achievements)}\n")
 
-    # 2. Achievements common to ALL players (INTERSECTION)
     common_all = alice.intersection(bob).intersection(charlie)
     print(f"Common to all players: {common_all}\n")
 
-    # 3. Rare achievements (owned by only 1 player)
-    # Alice's unique achievements
     alice_only = alice.difference(bob).difference(charlie)
-    # Bob's unique achievements
     bob_only = bob.difference(alice).difference(charlie)
-    # Charlie's unique achievements
     charlie_only = charlie.difference(alice).difference(bob)
     rare = alice_only.union(bob_only).union(charlie_only)
     print(f"Rare achievements (1 player): {rare}\n")
 
-    # 4. Alice vs Bob comparison
     alice_bob_common = alice.intersection(bob)
     alice_unique = alice.difference(bob)
     bob_unique = bob.difference(alice)

@@ -22,7 +22,7 @@ class GardenError(Exception):
 
 
 class InputError(GardenError):
-    """Error for plant-related problems."""
+    """Raised when invalid input is provided."""
 
     pass
 
@@ -41,7 +41,7 @@ class GardenManager:
         self.plants: list[tuple[str, int, int]] = []
 
     def add_plants(self, plants: list[tuple[str, int, int]]) -> None:
-        """Adds multiple plants, raising PlantError on bad input."""
+        """Add plant to the garden."""
         print("Adding plants to garden...")
         for name, water, sun in plants:
             if not name:
@@ -54,11 +54,11 @@ class GardenManager:
             print(f"Added {name} successfully")
 
     def water_plants(self) -> None:
-        """Raises GardenError if any plant is already at max water."""
+        """Water all plants in the garden."""
         print("Watering plants...")
         print("Opening watering system")
         if not self.plants:
-            raise GardenError("No plants to water.")
+            raise WaterError("No plants to water.")
         for name, _, _ in self.plants:
             print(f"Watering {name} - success")
 
@@ -70,8 +70,7 @@ class GardenManager:
         for name, water, sun in self.plants:
             try:
                 if water < 1:
-                    raise WaterError(
-                        f"Water level {water} is too low (min 1)")
+                    raise WaterError(f"Water level {water} is too low (min 1)")
                 if water > 10:
                     raise WaterError(
                         f"Water level {water} is too high (max 10)")
