@@ -22,7 +22,7 @@ class InvalidPlant(Exception):
     pass
 
 
-def water_plants(plant_list: list) -> None:
+def water_plants(plant_list: list[str]) -> None:
     """Waters each plant in the provided list."""
     print("Opening watering system")
     for plant in plant_list:

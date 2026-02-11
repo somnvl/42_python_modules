@@ -12,3 +12,15 @@
 #                                                                             #
 # ########################################################################### #
 
+"""
+Position Tracker - Exercise 2
+"""
+
+import sys
+
+if __name__ == "__main__":
+    print("=== Game Coordinate System ===\n")
+
+    print("Position created: ")
+    print("Distance between (0, 0, 0) and : \n")
+
