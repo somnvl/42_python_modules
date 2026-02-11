@@ -18,6 +18,7 @@
 
 class InvalidPlant(Exception):
     """Raised when an invalid plant is encountered."""
+
     pass
 
 
@@ -25,7 +26,7 @@ def water_plants(plant_list: list) -> None:
     """Waters each plant in the provided list."""
     print("Opening watering system")
     for plant in plant_list:
-        if plant is None:
+        if not plant:
             raise InvalidPlant("Cannot water None - invalid plant!")
         print(f"Watering {plant}")
 
@@ -46,7 +47,7 @@ def test_watering_system() -> None:
 
     try:
         print("\nTesting with error...")
-        water_plants(["tomato", None, "carrots"])
+        water_plants(["tomato", "", "carrots"])
     except InvalidPlant as e:
         print(f"Error: {e}")
         error = 1
