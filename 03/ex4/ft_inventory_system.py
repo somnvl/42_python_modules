@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # ########################################################################### #
 #                                                                             #
 #                                                          :::      ::::::::  #
@@ -8,11 +7,14 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/11 03:39:30 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/11 03:39:31 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/16 18:31:39 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-"""Inventory Master - Exercise 4: Manage game inventory with dicts"""
+"""
+Inventory Master - Exercise 4
+Manage game inventory with dicts
+"""
 
 import sys
 
@@ -61,7 +63,10 @@ if __name__ == "__main__":
         )
         for item, qty in sorted_items:
             percentage = (qty / total_items) * 100
-            unit = "unit" if qty == 1 else "units"
+            if qty == 1:
+                unit = "unit"
+            else:
+                unit = "units"
             print(f"{item}: {qty} {unit} ({percentage:.1f}%)")
 
         # 3. Statistics
@@ -69,18 +74,30 @@ if __name__ == "__main__":
         most_abundant = max(inventory.items(), key=get_quantity)
         least_abundant = min(inventory.items(), key=get_quantity)
         print(f"Most abundant: {most_abundant[0]} ({most_abundant[1]} units)")
-        print(f"Least abundant: {least_abundant[0]} ({least_abundant[1]} units)\n")
+        print(
+            f"Least abundant: {least_abundant[0]} ({least_abundant[1]} units)")
+        print()
 
         # 4. Categorize items
-        print("\n=== Item Categories ===")
-        moderate = {k: v for k, v in inventory.items() if v >= 3}
-        scarce = {k: v for k, v in inventory.items() if v < 3}
+        print("=== Item Categories ===")
+        moderate = {}
+        for key, value in inventory.items():
+            if value >= 3:
+                moderate[key] = value
+        scarce = {}
+        for key, value in inventory.items():
+            if value < 3:
+                scarce[key] = value
         print(f"Moderate: {moderate}")
         print(f"Scarce: {scarce}\n")
 
         # 5. Management suggestions
         print("\n=== Management Suggestions ===")
-        restock = [item for item, qty in inventory.items() if qty == 1]
+        restock = []
+        for item, qty in inventory.items():
+            if qty == 1:
+                restock.append(item)
+
         print(f"Restock needed: {restock}\n")
 
         # 6. Dictionary properties demo
@@ -89,7 +106,8 @@ if __name__ == "__main__":
         print(f"Dictionary values: {list(inventory.values())}")
         sample_item = list(inventory.keys())[0]
         print(
-            f"Sample lookup - '{sample_item}' in inventory: {sample_item in inventory}"
+            f"Sample lookup - '{sample_item}' in inventory: "
+            f"{sample_item in inventory}"
         )
 
     except ValueError as e:
