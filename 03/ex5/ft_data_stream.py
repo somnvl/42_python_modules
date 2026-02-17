@@ -6,32 +6,36 @@
 #                                                      +:+ +:+         +:+    #
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/11 03:39:36 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/16 18:31:31 by somenvie           ###   ########.fr      #
+#   Created: 2026/02/17 16:08:23 by somenvie            #+#    #+#            #
+#   Updated: 2026/02/17 16:09:54 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
 """
 Stream Wizard - Exercise 5
-Process data streams with generator
+Process data streams with generators
 """
+
+import time
 
 
 def game_event_stream(count: int):
-    """
-    Generate game events one by one (streaming)
-    """
-    import random
-
+    """Generate game events one by one (streaming)"""
     players = ["alice", "bob", "charlie"]
     events = ["killed monster", "found treasure", "leveled up"]
 
     for i in range(1, count + 1):
+        seed = int(time.time() * 1000000 + i) % 1000
+
+        player_idx = ((i * 7) + (seed * 3)) % len(players)
+        event_idx = ((i * 11) + (seed * 5)) % len(events)
+        level = ((i * 13) + (seed * 7)) % 20 + 1
+
         yield {
             "id": i,
-            "player": random.choice(players),
-            "level": random.randint(1, 20),
-            "event": random.choice(events),
+            "player": players[player_idx],
+            "level": level,
+            "event": events[event_idx],
         }
 
 
@@ -61,21 +65,32 @@ def prime_generator(limit: int):
         num += 1
 
 
+def print_sequence(generator, name: str):
+    """Print a sequence from a generator with proper formatting"""
+    print(f"{name}: ", end="")
+    iterator = iter(generator)
+
+    first_value = next(iterator)
+    print(first_value, end="")
+
+    for value in iterator:
+        print(f", {value}", end="")
+
+
 if __name__ == "__main__":
     print("=== Game Data Stream Processor ===\n")
 
-    # Process 1000 events (streaming!)
     event_count = 1000
     print(f"Processing {event_count} game events...\n")
 
-    # Statistics counters
     high_level_count = 0
     treasure_count = 0
     levelup_count = 0
 
-    # Process events one by one (for-in loop)
-    for i, event in enumerate(game_event_stream(event_count), 1):
-        # Show first 3 events
+    start_time = time.time()
+
+    i = 1
+    for event in game_event_stream(event_count):
         if i <= 3:
             print(
                 f"Event {event['id']}: Player {event['player']} "
@@ -84,7 +99,6 @@ if __name__ == "__main__":
         elif i == 4:
             print("...\n")
 
-        # Count statistics (without storing all events!)
         if event["level"] >= 10:
             high_level_count += 1
         if event["event"] == "found treasure":
@@ -92,21 +106,20 @@ if __name__ == "__main__":
         if event["event"] == "leveled up":
             levelup_count += 1
 
-    # Display analytics
+        i += 1
+
+    end_time = time.time()
+    processing_time = end_time - start_time
+
     print("=== Stream Analytics ===")
     print(f"Total events processed: {event_count}")
     print(f"High-level players (10+): {high_level_count}")
     print(f"Treasure events: {treasure_count}")
     print(f"Level-up events: {levelup_count}")
-    print("Memory usage: Constant (streaming)\n")
+    print("Memory usage: Constant (streaming)")
+    print(f"Processing time: {processing_time:.4f} seconds\n")
 
-    # Fibonacci demonstration
     print("=== Generator Demonstration ===")
-    fib = fibonacci_generator(10)
-    fib_list = list(fib)  # Convert generator to list
-    print(f"Fibonacci sequence (first 10): {', '.join(map(str, fib_list))}")
-
-    # Prime numbers demonstration
-    primes = prime_generator(5)
-    prime_list = list(primes)
-    print(f"Prime numbers (first 5): {', '.join(map(str, prime_list))}")
+    print_sequence(fibonacci_generator(10), "Fibonacci sequence (first 10)")
+    print()
+    print_sequence(prime_generator(5), "Prime numbers (first 5)")
