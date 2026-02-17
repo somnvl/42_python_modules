@@ -6,11 +6,10 @@
 #                                                      +:+ +:+         +:+    #
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/17 16:25:03 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 16:26:30 by somenvie           ###   ########.fr      #
+#   Created: 2026/02/17 16:39:20 by somenvie            #+#    #+#            #
+#   Updated: 2026/02/17 16:41:17 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
-
 
 """
 Data Alchemist - Exercise 6
@@ -34,18 +33,32 @@ if __name__ == "__main__":
 
     print("--- List Comprehension Examples ---")
 
-    high_scorers = [p for p in players if player_data[p]["score"] >= 2000]
-    print(f"High scorers (2000+): {high_scorers}")
+    high_scorers = []
+    for p in players:
+        player_score = player_data[p]["score"]
+        if player_score >= 2000:
+            high_scorers.append(p)
+    print(f"High scorers (>2000): {high_scorers}")
 
-    scores_doubled = [s * 2 for s in scores]
+    scores_doubled = []
+    for s in scores:
+        doubled = s * 2
+        scores_doubled.append(doubled)
     print(f"Scores doubled: {scores_doubled}")
 
-    active_players = [p for p in players if player_data[p]["level"] >= 12]
-    print(f"Active players (level 12+): {active_players}\n")
+    active_players = []
+    for p in players:
+        player_level = player_data[p]["level"]
+        if player_level >= 12:
+            active_players.append(p)
+    print(f"Active players: {active_players}\n")
 
     print("--- Dict Comprehension Examples ---")
 
-    player_scores = {p: player_data[p]["score"] for p in players}
+    player_scores = {}
+    for p in players:
+        score = player_data[p]["score"]
+        player_scores[p] = score
     print(f"Player scores: {player_scores}")
 
     high_score_players = []
@@ -71,7 +84,10 @@ if __name__ == "__main__":
     }
     print(f"Score categories: {score_categories}")
 
-    counts = {p: player_data[p]["achievements"] for p in players}
+    counts = {}
+    for p in players:
+        achievements = player_data[p]["achievements"]
+        counts[p] = achievements
     print(f"Achievement counts: {counts}\n")
 
     print("--- Set Comprehension Examples ---")
@@ -79,32 +95,27 @@ if __name__ == "__main__":
     unique_players = {p for p in players}
     print(f"Unique players: {unique_players}")
 
-    high_performers = set()
-    for p in players:
-        score = player_data[p]["score"]
-        achievements = player_data[p]["achievements"]
-        if score > 2000 and achievements > 5:
-            high_performers.add(p)
-    print(f"High performers: {high_performers}")
+    unique_achievements = {player_data[p]["achievements"] for p in players}
+    print(f"Unique achievments: {unique_achievements}")
 
-    levels = {player_data[p]["level"] for p in players}
-    sorted_levels = sorted(levels)
-    print(f"Unique levels: {sorted_levels}\n")
+    active_region = {
+        "north"
+        if player_data[p]["level"] >= 15
+        else "south"
+        for p in active_players
+    }
+    print(f"Active region: {active_region}\n")
 
     print("--- Combined Analysis ---")
 
     total_players = len(unique_players)
     print(f"Total players: {total_players}")
 
-    total_score = sum(scores)
-    count = len(scores)
-    average = total_score / count
-    print(f"Average score: {average:.1f}")
+    total_unique_achievements = len(unique_achievements)
+    print(f"Total unique achievements: {total_unique_achievements}")
 
-    top = max(players, key=lambda p: player_data[p]["score"])
-    top_score = player_data[top]["score"]
-    top_ach = player_data[top]["achievements"]
+    average_score = sum(scores) / len(scores) if scores else 0
+    print(f"Average score: {average_score}")
 
+    top = max(player_scores, key=lambda k: player_scores[k])
     print(f"Top performer: {top}")
-    print(f"Score: {top_score} points")
-    print(f"Achievements: {top_ach}")
