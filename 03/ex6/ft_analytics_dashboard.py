@@ -7,50 +7,55 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/17 18:14:44 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 18:15:43 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/17 19:54:25 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
-
 
 """
 Data Alchemist - Exercise 6
 Transform data with comprehensions
 """
 
-if __name__ == "__main__":
-    scores = [2300, 1800, 2150, 2050]
-    players = ["alice", "bob", "charlie", "diana"]
 
+def get_score(player_tuple: tuple) -> int:
+    """Extract score from (player_name, score) tuple."""
+    return player_tuple[1]
+
+
+if __name__ == "__main__":
     player_data = {
         "alice": {
             "score": 2300,
             "level": 15,
-            "achievements": ["first_kill"],
+            "achievements": ["first_kill", "speed_demon", "boss_slayer",
+                             "level_10", "treasure_hunter"],
         },
         "bob": {
             "score": 1800,
             "level": 12,
-            "achievements": ["level_10"],
+            "achievements": ["level_10", "first_kill", "collector"],
         },
         "charlie": {
             "score": 2150,
             "level": 14,
-            "achievements": ["level_10"],
+            "achievements": ["level_10", "boss_slayer", "treasure_hunter",
+                             "speed_demon", "perfectionist", "collector",
+                             "first_kill"],
         },
         "diana": {
             "score": 2050,
             "level": 10,
-            "achievements": ["boss_slayer"],
+            "achievements": ["boss_slayer", "level_10", "first_kill",
+                             "treasure_hunter"],
         },
     }
 
-    # Keep player_data scores consistent with `scores` + `players`
-    for i in range(len(players)):
-        player_data[players[i]]["score"] = scores[i]
+    players = list(player_data.keys())
+    scores = [player_data[p]["score"] for p in players]
 
     print("=== Game Analytics Dashboard ===\n")
 
-    print("--- List Comprehension Examples ---")
+    print("=== List Comprehension Examples ===")
 
     high_scorers = [p for p in players if player_data[p]["score"] >= 2000]
     print(f"High scorers (>2000): {high_scorers}")
@@ -61,7 +66,7 @@ if __name__ == "__main__":
     active_players = [p for p in players if player_data[p]["level"] >= 12]
     print(f"Active players: {active_players}\n")
 
-    print("--- Dict Comprehension Examples ---")
+    print("=== Dict Comprehension Examples ===")
 
     player_scores = {p: player_data[p]["score"] for p in players}
     print(f"Player scores: {player_scores}")
@@ -79,7 +84,7 @@ if __name__ == "__main__":
     counts = {p: len(player_data[p]["achievements"]) for p in players}
     print(f"Achievement counts: {counts}\n")
 
-    print("--- Set Comprehension Examples ---")
+    print("=== Set Comprehension Examples ===")
 
     unique_players = {p for p in players}
     print(f"Unique players: {unique_players}")
@@ -89,13 +94,13 @@ if __name__ == "__main__":
     }
     print(f"Unique achievements: {unique_achievements}")
 
-    active_region = {
+    active_regions = {
         "north" if player_data[p]["level"] >= 15 else "south"
         for p in active_players
     }
-    print(f"Active region: {active_region}\n")
+    print(f"Active regions: {active_regions}\n")
 
-    print("--- Combined Analysis ---")
+    print("=== Combined Analysis ===")
 
     total_players = len(unique_players)
     print(f"Total players: {total_players}")
@@ -106,11 +111,8 @@ if __name__ == "__main__":
     average_score = sum(scores) / len(scores) if scores else 0
     print(f"Average score: {average_score}")
 
-    top = max(player_scores, key=lambda k: player_scores[k])
-    top_score = player_scores[top]
-    top_achievements = len(player_data[top]["achievements"])
-
+    top = max(player_scores.items(), key=get_score)
     print(
-        f"Top performer: {top} "
-        f"({top_score} points, {top_achievements} achievements)"
+        f"Top performer: {top[0]} "
+        f"({top[1]} points, {counts[top[0]]} achievements)"
     )

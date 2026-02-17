@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/17 17:25:47 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 17:35:33 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/17 19:20:05 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -80,7 +80,12 @@ if __name__ == "__main__":
         # 3. Statistics
         print("\n=== Inventory Statistics ===")
         most_abundant = sorted_items[0]
-        least_abundant = sorted_items[-1]
+
+        min_qty = sorted_items[-1][1]
+        least_abundant = next(
+            (item, qty) for item, qty in inventory.items()
+            if qty == min_qty
+        )
 
         print(f"Most abundant: {most_abundant[0]} ({most_abundant[1]} units)")
 

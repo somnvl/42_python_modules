@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/11 03:39:19 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 16:52:59 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/17 19:22:57 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -34,6 +34,9 @@ def distance(origin: tuple, pos: tuple) -> None:
     x1, y1, z1 = origin
     x2, y2, z2 = pos
     dist = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)
+    if dist == int(dist):
+        print(f"Distance between {origin} and {pos}: {dist:.1f}\n")
+        return
     print(f"Distance between {origin} and {pos}: {dist:.2f}\n")
 
 

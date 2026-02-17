@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/17 16:08:23 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 17:47:36 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/17 19:48:22 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,7 +16,7 @@ Stream Wizard - Exercise 5
 Process data streams with generators
 """
 
-import time
+# import time
 from typing import Generator
 
 
@@ -25,12 +25,12 @@ def game_event_stream(count: int) -> Generator[dict, None, None]:
     players = ["alice", "bob", "charlie"]
     events = ["killed monster", "found treasure", "leveled up"]
 
-    for i in range(1, count + 1):
-        seed = int(time.time() * 1000000 + i) % 1000
+    seed = id(object())
 
-        player_idx = ((i * 7) + (seed * 3)) % len(players)
-        event_idx = ((i * 11) + (seed * 5)) % len(events)
-        level = ((i * 13) + (seed * 7)) % 20 + 1
+    for i in range(1, count + 1):
+        player_idx = (i * 7 + seed * 3 + i * i) % len(players)
+        event_idx = (i * 11 + seed * 5 + i * i) % len(events)
+        level = (i * 13 + seed * 7 + i * i) % 20 + 1
 
         yield {
             "id": i,
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     treasure_count = 0
     levelup_count = 0
 
-    start_time = time.time()
+    # start_time = time.time()
 
     i = 1
     for event in game_event_stream(event_count):
@@ -112,8 +112,8 @@ if __name__ == "__main__":
 
         i += 1
 
-    end_time = time.time()
-    processing_time = end_time - start_time
+    # end_time = time.time()
+    # processing_time = end_time - start_time
 
     print("=== Stream Analytics ===")
     print(f"Total events processed: {event_count}")
@@ -121,9 +121,9 @@ if __name__ == "__main__":
     print(f"Treasure events: {treasure_count}")
     print(f"Level-up events: {levelup_count}")
     print("Memory usage: Constant (streaming)")
-    print(f"Processing time: {processing_time:.4f} seconds\n")
+    # print(f"Processing time: {processing_time:.3f} seconds\n")
 
-    print("=== Generator Demonstration ===")
+    print("\n=== Generator Demonstration ===")
     print_sequence(fibonacci_generator(10), "Fibonacci sequence (first 10)")
     print()
     print_sequence(prime_generator(5), "Prime numbers (first 5)")
