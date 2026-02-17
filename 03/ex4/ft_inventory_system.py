@@ -6,8 +6,8 @@
 #                                                      +:+ +:+         +:+    #
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/11 03:39:30 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 16:11:28 by somenvie           ###   ########.fr      #
+#   Created: 2026/02/17 17:25:47 by somenvie            #+#    #+#            #
+#   Updated: 2026/02/17 17:35:33 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -20,25 +20,28 @@ import sys
 
 
 def parsing() -> dict:
-    """Parse command line arguments and build inventory dictionary"""
+    """Parse command line arguments and build inventory dictionary."""
     if len(sys.argv) == 1:
         raise ValueError("Usage: ./ft_inventory_system.py <item:qty> ...")
 
     inventory = {}
+
     for arg in sys.argv[1:]:
         if ":" not in arg:
             raise ValueError(f"Invalid format '{arg}'. Use item:quantity")
-        item, qty = arg.split(":")
+
+        item, qty = arg.split(":", 1)
 
         if not qty.isdigit():
             raise ValueError(f"Quantity must be a number, got '{qty}'")
+
         inventory[item] = int(qty)
 
     return inventory
 
 
 def get_quantity(item_tuple: tuple) -> int:
-    """Extract quantity from (item_name, quantity) tuple"""
+    """Extract quantity from (item_name, quantity) tuple."""
     return item_tuple[1]
 
 
@@ -49,7 +52,10 @@ if __name__ == "__main__":
         inventory = parsing()
 
         # 1. Total items and unique types
-        total_items = sum(inventory.values())
+        total_items = 0
+        for qty in inventory.values():
+            total_items += qty
+
         unique_types = len(inventory.keys())
         print(f"Total items in inventory: {total_items}")
         print(f"Unique item types: {unique_types}\n")
@@ -61,50 +67,59 @@ if __name__ == "__main__":
             key=get_quantity,
             reverse=True,
         )
+
         for item, qty in sorted_items:
-            percentage = (qty / total_items) * 100
-            if qty == 1:
-                unit = "unit"
+            if total_items == 0:
+                percentage = 0.0
             else:
-                unit = "units"
+                percentage = (qty / total_items) * 100
+
+            unit = "unit" if qty == 1 else "units"
             print(f"{item}: {qty} {unit} ({percentage:.1f}%)")
 
         # 3. Statistics
         print("\n=== Inventory Statistics ===")
-        most_abundant = max(inventory.items(), key=get_quantity)
-        least_abundant = min(inventory.items(), key=get_quantity)
+        most_abundant = sorted_items[0]
+        least_abundant = sorted_items[-1]
+
         print(f"Most abundant: {most_abundant[0]} ({most_abundant[1]} units)")
-        print(
-            f"Least abundant: {least_abundant[0]} ({least_abundant[1]} units)")
-        print()
+
+        least_unit = "unit" if least_abundant[1] == 1 else "units"
+        print(f"Least abundant: "
+              f"{least_abundant[0]} ({least_abundant[1]} {least_unit})")
 
         # 4. Categorize items
-        print("=== Item Categories ===")
+        print("\n=== Item Categories ===")
         moderate = {}
-        for key, value in inventory.items():
-            if value >= 3:
-                moderate[key] = value
         scarce = {}
-        for key, value in inventory.items():
-            if value < 3:
-                scarce[key] = value
+
+        for item, qty in inventory.items():
+            if qty > 3:
+                moderate[item] = qty
+            else:
+                scarce[item] = qty
+
         print(f"Moderate: {moderate}")
-        print(f"Scarce: {scarce}\n")
+        print(f"Scarce: {scarce}")
 
         # 5. Management suggestions
         print("\n=== Management Suggestions ===")
         restock = []
+
         for item, qty in inventory.items():
-            if qty == 1:
+            if qty <= 1:
                 restock.append(item)
 
-        print(f"Restock needed: {restock}\n")
+        print(f"Restock needed: {', '.join(restock)}")
 
         # 6. Dictionary properties demo
         print("\n=== Dictionary Properties Demo ===")
-        print(f"Dictionary keys: {list(inventory.keys())}")
-        print(f"Dictionary values: {list(inventory.values())}")
-        sample_item = list(inventory.keys())[0]
+        print(f"Dictionary keys: {', '.join(inventory.keys())}")
+        print(
+            f"Dictionary values: "
+            f"{', '.join(str(v) for v in inventory.values())}")
+
+        sample_item = next(iter(inventory))
         print(
             f"Sample lookup - '{sample_item}' in inventory: "
             f"{sample_item in inventory}"

@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/17 16:08:23 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 16:09:54 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/17 17:47:36 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -17,9 +17,10 @@ Process data streams with generators
 """
 
 import time
+from typing import Generator
 
 
-def game_event_stream(count: int):
+def game_event_stream(count: int) -> Generator[dict, None, None]:
     """Generate game events one by one (streaming)"""
     players = ["alice", "bob", "charlie"]
     events = ["killed monster", "found treasure", "leveled up"]
@@ -39,7 +40,7 @@ def game_event_stream(count: int):
         }
 
 
-def fibonacci_generator(limit: int):
+def fibonacci_generator(limit: int) -> Generator[int, None, None]:
     """Generate Fibonacci numbers up to limit"""
     a, b = 0, 1
     count = 0
@@ -49,7 +50,7 @@ def fibonacci_generator(limit: int):
         count += 1
 
 
-def prime_generator(limit: int):
+def prime_generator(limit: int) -> Generator[int, None, None]:
     """Generate prime numbers up to limit"""
     count = 0
     num = 2
@@ -65,7 +66,10 @@ def prime_generator(limit: int):
         num += 1
 
 
-def print_sequence(generator, name: str):
+def print_sequence(
+    generator: Generator[int, None, None],
+    name: str,
+) -> None:
     """Print a sequence from a generator with proper formatting"""
     print(f"{name}: ", end="")
     iterator = iter(generator)
