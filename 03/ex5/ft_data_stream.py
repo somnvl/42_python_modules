@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/17 16:08:23 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/19 12:50:35 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/19 12:56:23 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -127,3 +127,4 @@ if __name__ == "__main__":
     print_sequence(fibonacci_generator(10), "Fibonacci sequence (first 10)")
     print()
     print_sequence(prime_generator(5), "Prime numbers (first 5)")
+    print()
