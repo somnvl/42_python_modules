@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/11 03:39:12 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 16:50:37 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/19 12:15:07 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,12 +16,12 @@ Score Cruncher - Exercise 1
 Analyzes player scores using lists
 """
 
-from sys import argv
+import sys
 
 if __name__ == "__main__":
     print("=== Player Score Analytics ===")
 
-    argc = len(argv)
+    argc = len(sys.argv)
 
     if argc == 1:
         print(
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         try:
             x = 1
             while x < argc:
-                scores.append(int(argv[x]))
+                scores.append(int(sys.argv[x]))
                 x += 1
 
             print(f"Scores processed: {scores}")

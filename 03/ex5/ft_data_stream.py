@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/17 16:08:23 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 19:48:22 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/19 12:50:35 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -25,7 +25,7 @@ def game_event_stream(count: int) -> Generator[dict, None, None]:
     players = ["alice", "bob", "charlie"]
     events = ["killed monster", "found treasure", "leveled up"]
 
-    seed = id(object())
+    seed = 1
 
     for i in range(1, count + 1):
         player_idx = (i * 7 + seed * 3 + i * i) % len(players)
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     print(f"Total events processed: {event_count}")
     print(f"High-level players (10+): {high_level_count}")
     print(f"Treasure events: {treasure_count}")
-    print(f"Level-up events: {levelup_count}")
+    print(f"Level-up events: {levelup_count}\n")
     print("Memory usage: Constant (streaming)")
     # print(f"Processing time: {processing_time:.3f} seconds\n")
 

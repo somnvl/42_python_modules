@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/17 18:14:44 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 19:54:25 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/19 12:51:48 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -50,8 +50,8 @@ if __name__ == "__main__":
         },
     }
 
-    players = list(player_data.keys())
-    scores = [player_data[p]["score"] for p in players]
+    players = [p for p in player_data.keys()]
+    scores = [player_data[p]["score"] for p in player_data.keys()]
 
     print("=== Game Analytics Dashboard ===\n")
 

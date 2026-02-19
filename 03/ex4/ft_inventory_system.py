@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/17 17:25:47 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 19:20:05 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/19 12:48:26 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -40,11 +40,6 @@ def parsing() -> dict:
     return inventory
 
 
-def get_quantity(item_tuple: tuple) -> int:
-    """Extract quantity from (item_name, quantity) tuple."""
-    return item_tuple[1]
-
-
 if __name__ == "__main__":
     print("=== Inventory System Analysis ===")
 
@@ -62,36 +57,36 @@ if __name__ == "__main__":
 
         # 2. Current inventory (sorted by quantity, descending)
         print("=== Current Inventory ===")
-        sorted_items = sorted(
-            inventory.items(),
-            key=get_quantity,
-            reverse=True,
-        )
-
-        for item, qty in sorted_items:
-            if total_items == 0:
-                percentage = 0.0
-            else:
-                percentage = (qty / total_items) * 100
-
-            unit = "unit" if qty == 1 else "units"
-            print(f"{item}: {qty} {unit} ({percentage:.1f}%)")
+        printed = {}
+        while len(printed) < len(inventory):
+            max_qty = -1
+            max_item = ""
+            for item, qty in inventory.items():
+                if item not in printed and qty > max_qty:
+                    max_qty = qty
+                    max_item = item
+            printed[max_item] = max_qty
+            percentage = (max_qty / total_items) * 100 if total_items else 0.0
+            unit = "unit" if max_qty == 1 else "units"
+            print(f"{max_item}: {max_qty} {unit} ({percentage:.1f}%)")
 
         # 3. Statistics
         print("\n=== Inventory Statistics ===")
-        most_abundant = sorted_items[0]
+        max_qty = -1
+        min_qty = -1
+        max_item = ""
+        min_item = ""
+        for item, qty in inventory.items():
+            if qty > max_qty:
+                max_qty = qty
+                max_item = item
+            if min_qty == -1 or qty < min_qty:
+                min_qty = qty
+                min_item = item
 
-        min_qty = sorted_items[-1][1]
-        least_abundant = next(
-            (item, qty) for item, qty in inventory.items()
-            if qty == min_qty
-        )
-
-        print(f"Most abundant: {most_abundant[0]} ({most_abundant[1]} units)")
-
-        least_unit = "unit" if least_abundant[1] == 1 else "units"
-        print(f"Least abundant: "
-              f"{least_abundant[0]} ({least_abundant[1]} {least_unit})")
+        print(f"Most abundant: {max_item} ({max_qty} units)")
+        unit = "unit" if min_qty == 1 else "units"
+        print(f"Least abundant: {min_item} ({min_qty} {unit})")
 
         # 4. Categorize items
         print("\n=== Item Categories ===")
@@ -109,22 +104,34 @@ if __name__ == "__main__":
 
         # 5. Management suggestions
         print("\n=== Management Suggestions ===")
-        restock = []
-
+        restock = ""
         for item, qty in inventory.items():
             if qty <= 1:
-                restock.append(item)
-
-        print(f"Restock needed: {', '.join(restock)}")
+                if restock:
+                    restock += ", "
+                restock += item
+        print(f"Restock needed: {restock}")
 
         # 6. Dictionary properties demo
         print("\n=== Dictionary Properties Demo ===")
-        print(f"Dictionary keys: {', '.join(inventory.keys())}")
-        print(
-            f"Dictionary values: "
-            f"{', '.join(str(v) for v in inventory.values())}")
+        keys_str = ""
+        for key in inventory.keys():
+            if keys_str:
+                keys_str += ", "
+            keys_str += key
+        print(f"Dictionary keys: {keys_str}")
 
-        sample_item = next(iter(inventory))
+        vals_str = ""
+        for val in inventory.values():
+            if vals_str:
+                vals_str += ", "
+            vals_str += str(val)
+        print(f"Dictionary values: {vals_str}")
+
+        sample_item = ""
+        for key in inventory.keys():
+            sample_item = key
+            break
         print(
             f"Sample lookup - '{sample_item}' in inventory: "
             f"{sample_item in inventory}"

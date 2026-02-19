@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/11 03:39:19 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/17 19:22:57 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/19 12:22:33 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -24,9 +24,8 @@ def parsing(coord_str: str) -> tuple:
     try:
         coord = coord_str.split(",")
         return (int(coord[0]), int(coord[1]), int(coord[2]))
-    except (ValueError, IndexError):
-        raise ValueError(
-            f"invalid literal for int() with base 10: '{coord[0]}'")
+    except (ValueError, IndexError) as e:
+        raise ValueError(str(e))
 
 
 def distance(origin: tuple, pos: tuple) -> None:
