@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/21 18:28:47 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/21 21:16:07 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/21 21:18:04 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -17,9 +17,9 @@ Enterprise-grade data processing pipeline system supporting multiple
 input formats (JSON, CSV, Stream) through a unified adapter interface.
 """
 
-from abc import ABC, abstractmethod
-from typing import Any, Protocol, List, Union
 import time
+from abc import ABC, abstractmethod
+from typing import Any, List, Protocol, Union
 
 
 class ProcessingStage(Protocol):
