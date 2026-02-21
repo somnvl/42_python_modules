@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/21 18:28:47 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/21 21:12:00 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/21 21:16:07 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -222,6 +222,8 @@ def main() -> None:
         print(f"Error detected in Stage 2: {e}")
         print("Recovery initiated: Switching to backup processor")
         print("Recovery successful: Pipeline restored, processing resumed\n")
+
+    print("Nexus Integration complete. All systems operational.")
 
 
 if __name__ == "__main__":
