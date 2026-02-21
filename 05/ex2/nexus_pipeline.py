@@ -7,9 +7,15 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/21 18:28:47 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/21 21:08:41 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/21 21:12:00 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
+"""
+Code Nexus - Exercise 2: Nexus Integration.
+Enterprise-grade data processing pipeline system supporting multiple
+input formats (JSON, CSV, Stream) through a unified adapter interface.
+"""
 
 from abc import ABC, abstractmethod
 from typing import Any, Protocol, List, Union
@@ -17,50 +23,73 @@ import time
 
 
 class ProcessingStage(Protocol):
+    """Interface for a single pipeline stage."""
+
     def process(self, data: Any) -> Any:
+        """Process data and return the result."""
         pass
 
 
 class ProcessingPipeline(ABC):
+    """Abstract base for all pipeline adapters."""
+
     def __init__(self, pipeline_id: str) -> None:
+        """Set pipeline_id and initialise empty stage list."""
         self.pipeline_id = pipeline_id
         self.stages: List[Any] = []
 
     @abstractmethod
     def process(self, data: Any) -> Union[str, Any]:
+        """Run data through all stages and return the result."""
         pass
 
 
 class InputStage:
+    """Stage 1 — input validation and parsing."""
+
     def init_stage(self) -> None:
+        """Print stage label."""
         print("Stage 1: Input validation and parsing")
 
     def process(self, data: Any) -> Any:
+        """Return data unchanged after validation."""
         return data
 
 
 class TransformStage:
+    """Stage 2 — data transformation and enrichment."""
+
     def init_stage(self) -> None:
+        """Print stage label."""
         print("Stage 2: Data transformation and enrichment")
 
     def process(self, data: Any) -> Any:
+        """Return data unchanged after transformation."""
         return data
 
 
 class OutputStage:
+    """Stage 3 — output formatting and delivery."""
+
     def init_stage(self) -> None:
+        """Print stage label."""
         print("Stage 3: Output formatting and delivery")
 
     def process(self, data: Any) -> Any:
+        """Return data unchanged after formatting."""
         return data
 
 
 class JSONAdapter(ProcessingPipeline):
+    """Pipeline adapter for JSON sensor payloads."""
+
     def __init__(self, pipeline_id: str) -> None:
+        """Initialise with the three default stages."""
         super().__init__(pipeline_id)
         self.stages = [InputStage(), TransformStage(), OutputStage()]
 
     def process(self, data: Any) -> Union[str, Any]:
+        """Extract 'value' from dict and return a formatted reading."""
         print("Processing JSON data through pipeline...")
         print(f"Input: {data}")
         print("Transform: Enriched with metadata and validation")
@@ -71,11 +100,15 @@ class JSONAdapter(ProcessingPipeline):
 
 
 class CSVAdapter(ProcessingPipeline):
+    """Pipeline adapter for CSV activity logs."""
+
     def __init__(self, pipeline_id: str) -> None:
+        """Initialise with the three default stages."""
         super().__init__(pipeline_id)
         self.stages = [InputStage(), TransformStage(), OutputStage()]
 
     def process(self, data: Any) -> Union[str, Any]:
+        """Count CSV rows and return a user-activity summary."""
         print("Processing CSV data through same pipeline...")
         print(f'Input: "{data}"')
         print("Transform: Parsed and structured data")
@@ -86,11 +119,15 @@ class CSVAdapter(ProcessingPipeline):
 
 
 class StreamAdapter(ProcessingPipeline):
+    """Pipeline adapter for real-time sensor streams."""
+
     def __init__(self, pipeline_id: str) -> None:
+        """Initialise with the three default stages."""
         super().__init__(pipeline_id)
         self.stages = [InputStage(), TransformStage(), OutputStage()]
 
     def process(self, data: Any) -> Union[str, Any]:
+        """Average a list of readings and return a stream summary."""
         print("Processing Stream data through same pipeline...")
         print("Input: Real-time sensor stream")
         print("Transform: Aggregated and filtered")
@@ -104,6 +141,8 @@ class StreamAdapter(ProcessingPipeline):
 
 
 class NexusManager:
+    """Central manager for pipeline registration and orchestration."""
+
     def __init__(self) -> None:
         """Initialize the Nexus Manager with an empty pipeline list."""
         self.pipelines: List[ProcessingPipeline] = []
@@ -116,13 +155,19 @@ class NexusManager:
         print(f"Pipeline capacity: {capacity} streams/second\n")
 
     def create_pipeline(self, pipeline: ProcessingPipeline) -> None:
+        """Register a pipeline and initialise each of its stages."""
         if isinstance(pipeline, ProcessingPipeline):
             self.pipelines.append(pipeline)
             print("Creating Data Processing Pipeline...")
             for stage in pipeline.stages:
                 stage.init_stage()
 
-    def chain_pipelines(self, pipelines: List[ProcessingPipeline], data: Any) -> None:
+    def chain_pipelines(
+        self,
+        pipelines: List[ProcessingPipeline],
+        data: Any,
+    ) -> None:
+        """Chain pipelines sequentially and report performance."""
         ids = " -> ".join(f"Pipeline {p.pipeline_id}" for p in pipelines)
         print(ids)
         print("Data flow: Raw -> Processed -> Analyzed -> Stored\n")
@@ -147,6 +192,7 @@ class NexusManager:
 
 
 def main() -> None:
+    """Demonstrate the Nexus pipeline system."""
     print("=== CODE NEXUS - ENTERPRISE PIPELINE SYSTEM ===\n")
 
     manager = NexusManager()
