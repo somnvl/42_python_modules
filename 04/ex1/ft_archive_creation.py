@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/20 16:43:51 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/20 17:14:23 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/20 18:46:37 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -24,11 +24,11 @@ if __name__ == "__main__":
             data = (
                 "[ENTRY 001] New quantum algorithm discovered\n"
                 "[ENTRY 002] Efficiency increased by 347%\n"
-                "[ENTRY 003] Archived by Data Archivist trainee\n"
+                "[ENTRY 003] Archived by Data Archivist trainee"
             )
             f.write(data)
             print(data)
-        print("Data inscription complete. Storage unit sealed.")
+        print("\nData inscription complete. Storage unit sealed.")
         print(f"Archive '{file}' ready for long-term preservation.")
     except FileExistsError:
         print("\nERROR: Archive already exists")
