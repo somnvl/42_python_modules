@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+# ########################################################################### #
+#                                                                             #
+#                                                          :::      ::::::::  #
+#   SpellCard.py                                         :+:      :+:    :+:  #
+#                                                      +:+ +:+         +:+    #
+#   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
+#                                                  +#+#+#+#+#+   +#+          #
+#   Created: 2026/02/24 15:28:11 by somenvie            #+#    #+#            #
+#   Updated: 2026/02/24 18:00:09 by somenvie           ###   ########.fr      #
+#                                                                             #
+# ########################################################################### #
+
+from ex0.Card import Card
+
+
+class SpellCard(Card):
+    def __init__(
+        self, name: str, cost: int, rarity: str, effect_type: str
+    ) -> None:
+        super().__init__(name, cost, rarity)
+        self.effect_type = effect_type
+
+    def play(self, game_state: dict) -> dict:
+        """Cast the spell and consume it."""
+        return {
+                "card_played": self.name,
+                "mana_used": self.cost,
+                "effect": self.effect_type
+            }
+
+    def resolve_effect(self, targets: list) -> dict:
+        """Resolve the spell effect on targets."""
+        return {
+            "spell": self.name,
+            "targets": targets,
+            "effect_applied": self.effect_type,
+        }

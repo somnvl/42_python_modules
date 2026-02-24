@@ -2,19 +2,19 @@
 # ########################################################################### #
 #                                                                             #
 #                                                          :::      ::::::::  #
-#   __init__.py                                          :+:      :+:    :+:  #
+#   main.py                                              :+:      :+:    :+:  #
 #                                                      +:+ +:+         +:+    #
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/23 15:30:55 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/23 15:32:36 by somenvie           ###   ########.fr      #
+#   Created: 2026/02/24 18:05:51 by somenvie            #+#    #+#            #
+#   Updated: 2026/02/24 18:06:01 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-from .basic import lead_to_gold, stone_to_gem
-from .advanced import philosophers_stone, elixir_of_life
 
-__all__ = ["lead_to_gold",
-           "stone_to_gem",
-           "philosophers_stone",
-           "elixir_of_life"]
+def main() -> None:
+    print("\n=== DataDeck Deck Builder ===\n")
+
+
+if __name__ == "__main__":
+    main()

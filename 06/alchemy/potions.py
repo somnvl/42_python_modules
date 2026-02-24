@@ -7,11 +7,11 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/21 23:01:47 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/21 23:13:40 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/23 15:13:27 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-from . import elements
+from .elements import create_fire, create_water, create_earth, create_air
 
 
 def healing_potion() -> str:
