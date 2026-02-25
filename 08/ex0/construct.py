@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 15:02:13 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 17:48:18 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 18:28:14 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -88,3 +88,13 @@ if __name__ == "__main__":
         display_inside_venv(get_venv_info())
     else:
         display_outside_venv()
+
+"""
+python3 construct.py
+
+python3 -m venv matrix_env
+source matrix_env/bin/activate
+python3 construct.py
+
+deactivate
+"""

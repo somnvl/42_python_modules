@@ -7,12 +7,13 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 15:03:35 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 18:24:35 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 18:29:42 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-import sys
 import os
+import sys
+
 from dotenv import load_dotenv
 
 
@@ -66,3 +67,14 @@ if __name__ == "__main__":
     check_config(config)
     display_config(config)
     print("\nThe Oracle sees all configurations.")
+
+"""
+source matrix_env/bin/activate
+python3 oracle.py
+
+MATRIX_MODE=production python3 oracle.py
+
+mv .env .env.bak && python3 oracle.py && mv .env.bak .env
+
+git status
+"""

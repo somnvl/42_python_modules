@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 15:02:31 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 18:12:47 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 18:28:51 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -101,3 +101,17 @@ if __name__ == "__main__":
     check_dependencies()
     data = analyze_data()
     generate_plot(data)
+
+"""
+python3 loading.py
+
+python3 -m venv matrix_env
+source matrix_env/bin/activate
+pip install -r requirements.txt
+python3 loading.py
+
+deactivate
+pip install poetry
+poetry install
+poetry run python3 loading.py
+"""
