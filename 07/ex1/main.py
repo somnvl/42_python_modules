@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/24 15:29:06 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/24 18:02:42 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 02:16:30 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -24,14 +24,6 @@ def main() -> None:
     deck = Deck()
 
     deck.add_card(
-        CreatureCard(
-            "Fire Dragon",
-            5,
-            "Legendary",
-            7,
-            5)
-    )
-    deck.add_card(
         SpellCard(
             "Lightning Bolt",
             4,
@@ -46,6 +38,14 @@ def main() -> None:
             "Common",
             5,
             "+1 mana per turn")
+    )
+    deck.add_card(
+        CreatureCard(
+            "Fire Dragon",
+            5,
+            "Legendary",
+            7,
+            5)
     )
 
     print(deck.get_deck_stats())
