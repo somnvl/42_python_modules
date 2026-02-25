@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/24 15:29:06 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 02:16:30 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 15:14:57 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -48,7 +48,7 @@ def main() -> None:
             5)
     )
 
-    print(deck.get_deck_stats())
+    print(f"Deck stats: {deck.get_deck_stats()}")
 
     print("\nDrawing and playing cards:")
 
