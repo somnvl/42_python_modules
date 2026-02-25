@@ -7,9 +7,11 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/24 15:29:10 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/24 17:48:03 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 01:57:19 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
+"""Deck management system for DataDeck."""
 
 import random
 from ex0.Card import Card
@@ -19,13 +21,18 @@ from ex1.ArtifactCard import ArtifactCard
 
 
 class Deck:
+    """Manages a collection of cards of any type."""
+
     def __init__(self) -> None:
+        """Initialize an empty deck."""
         self.cards = []
 
     def add_card(self, card: Card) -> None:
+        """Add a card to the deck."""
         self.cards.append(card)
 
     def remove_card(self, card_name: str) -> bool:
+        """Remove a card by name. Return True if found, False otherwise."""
         for card in self.cards:
             if card.name == card_name:
                 self.cards.remove(card)
@@ -33,14 +40,17 @@ class Deck:
         return False
 
     def shuffle(self) -> None:
+        """Shuffle the deck in place."""
         random.shuffle(self.cards)
 
     def draw_card(self) -> Card:
+        """Draw and return the top card of the deck."""
         card = self.cards[0]
         self.cards.remove(card)
         return card
 
     def get_deck_stats(self) -> dict:
+        """Return stats about the deck's composition and average cost."""
         creatures = 0
         spells = 0
         artifacts = 0

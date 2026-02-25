@@ -7,19 +7,22 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/24 15:28:41 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/24 17:30:02 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 01:57:16 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
+"""Concrete ArtifactCard implementation for DataDeck."""
 
 from ex0.Card import Card
 
 
 class ArtifactCard(Card):
-    """Concrete implementation of an artifact card."""
+    """A permanent card that stays in play until destroyed."""
 
     def __init__(
         self, name: str, cost: int, rarity: str, durability: int, effect: str
     ) -> None:
+        """Initialize artifact with durability (must be > 0) and effect."""
         if durability <= 0:
             raise ValueError("Durability must be a positive integer.")
         super().__init__(name, cost, rarity)
