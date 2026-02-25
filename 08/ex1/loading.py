@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 15:02:31 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 18:28:51 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 18:33:28 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -16,15 +16,15 @@ Load and verify required packages, analyze simulated Matrix data,
 and generate a visualization saved as matrix_analysis.png.
 """
 
-from typing import Any
-import sys
-import importlib.util
 import importlib.metadata
+import importlib.util
+import sys
+from typing import Any
 
 
 def check_dependencies() -> dict:
     """Check required packages and return their versions."""
-    packages = ["pandas", "numpy", "matplotlib"]
+    packages = ["pandas", "numpy", "matplotlib", "requests"]
     results = {}
     all_ok = True
 
@@ -55,8 +55,8 @@ def check_dependencies() -> dict:
 def analyze_data() -> Any:
     """Generate and analyze simulated Matrix data."""
     try:
-        import pandas as pd
         import numpy as np
+        import pandas as pd
 
         np.random.seed(42)
         data = pd.DataFrame(

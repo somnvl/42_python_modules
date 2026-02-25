@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 15:02:13 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 18:28:14 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 18:32:18 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -85,7 +85,9 @@ def display_outside_venv() -> None:
 
 if __name__ == "__main__":
     if is_in_venv():
-        display_inside_venv(get_venv_info())
+        info = get_venv_info()
+        if info:
+            display_inside_venv(info)
     else:
         display_outside_venv()
 
