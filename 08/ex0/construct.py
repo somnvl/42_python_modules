@@ -6,8 +6,8 @@
 #                                                      +:+ +:+         +:+    #
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
-#   Created: 2026/02/25 15:02:13 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 18:32:18 by somenvie           ###   ########.fr      #
+#   Created: 2026/02/25 18:40:31 by somenvie            #+#    #+#            #
+#   Updated: 2026/02/25 18:42:44 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -23,80 +23,84 @@ import os
 import site
 
 
-def is_in_venv() -> bool:
-    """Return True if running inside a virtual environment."""
+def is_venv() -> bool:
+    """
+    Return True if running inside a virtual environment.
+    In a virtual environment, sys.prefix differs from sys.base_prefix.
+    """
+    return sys.prefix != sys.base_prefix
+
+
+def get_site_packages_path() -> str:
+    """
+    Return the primary site-packages installation path.
+    """
     try:
-        if sys.prefix != sys.base_prefix:
-            return True
-        return False
-    except Exception as e:
-        print(f"Error during venv detection: {e}")
-        return False
+        paths = site.getsitepackages()
+        if paths:
+            return paths[0]
+        return "Unavailable"
+    except Exception:
+        return "Unavailable"
 
 
-def get_venv_info() -> dict:
-    """Return name, path and site-packages path of the active virtual env."""
-    try:
-        venv_path = sys.prefix
-        venv_name = os.path.basename(venv_path)
-        packages_path = site.getsitepackages()[0]
-        return {
-            "name": venv_name,
-            "path": venv_path,
-            "packages": packages_path,
-        }
-    except Exception as e:
-        print(f"Error retrieving venv info: {e}")
-        return {}
+def display_inside_venv() -> None:
+    """
+    Display information when running inside a virtual environment.
+    """
+    venv_path = sys.prefix
+    venv_name = os.path.basename(venv_path)
+    packages_path = get_site_packages_path()
 
+    print("\nMATRIX STATUS: Welcome to the construct\n")
+    print(f"Current Python: {sys.executable}")
+    print(f"Virtual Environment: {venv_name}")
+    print(f"Environment Path: {venv_path}\n")
 
-def display_inside_venv(info: dict) -> None:
-    """Print details of the active virtual environment."""
-    try:
-        print("\nMATRIX STATUS: Welcome to the construct\n")
-        print(f"Current Python: {sys.executable}")
-        print(f"Virtual Environment: {info['name']}")
-        print(f"Environment Path: {info['path']}\n")
-        print("SUCCESS: You're in an isolated environment!")
-        print("Safe to install packages without affecting the global system.")
-        print(f"\nPackage installation path:\n{info['packages']}")
-    except Exception as e:
-        print(f"Error displaying venv info: {e}")
+    print("SUCCESS: You're in an isolated environment!")
+    print("Safe to install packages without affecting the global system.\n")
+
+    print("Environment comparison:")
+    print(f"Base prefix (global Python): {sys.base_prefix}")
+    print(f"Current prefix (virtual env): {sys.prefix}\n")
+
+    print("Package installation path:")
+    print(packages_path)
 
 
 def display_outside_venv() -> None:
-    """Print a warning and setup instructions when no venv is active."""
-    try:
-        print("\nMATRIX STATUS: You're still plugged in\n")
-        print(f"Current Python: {sys.executable}")
-        print("Virtual Environment: None detected\n")
-        print("WARNING: You're in the global environment!")
-        print("The machines can see everything you install.\n")
-        print("To enter the construct, run:")
-        print("python -m venv matrix_env")
-        print("source matrix_env/bin/activate  # On Unix")
-        print("matrix_env")
-        print("Scripts")
-        print("activate     # On Windows")
-        print("\nThen run this program again.")
-    except Exception as e:
-        print(f"Error displaying outside info: {e}")
+    """
+    Display warning and instructions when not in a virtual environment.
+    """
+    print("\nMATRIX STATUS: You're still plugged in\n")
+    print(f"Current Python: {sys.executable}")
+    print("Virtual Environment: None detected\n")
+
+    print("WARNING: You're in the global environment!")
+    print("The machines can see everything you install.\n")
+
+    print("Environment comparison:")
+    print(f"Base prefix (global Python): {sys.base_prefix}")
+    print(f"Current prefix: {sys.prefix}\n")
+
+    print("To enter the construct, run:")
+    print("python -m venv matrix_env")
+    print("source matrix_env/bin/activate  # On Unix")
+    print("matrix_env\\Scripts\\activate   # On Windows")
+    print("\nThen run this program again.")
 
 
 if __name__ == "__main__":
-    if is_in_venv():
-        info = get_venv_info()
-        if info:
-            display_inside_venv(info)
+    if is_venv():
+        display_inside_venv()
     else:
         display_outside_venv()
 
 """
-python3 construct.py
-
+./construct.py
 python3 -m venv matrix_env
 source matrix_env/bin/activate
-python3 construct.py
 
+./construct.py
 deactivate
 """
