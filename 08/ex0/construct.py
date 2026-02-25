@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 15:02:13 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 16:26:48 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 16:35:08 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -65,7 +65,7 @@ def display_inside_venv(info: dict) -> None:
 
 
 def display_outside_venv() -> None:
-    """Print a warning and setup instructions when no virtual env is active."""
+    """Print a warning and setup instructions when no venv is active."""
     try:
         print("\nMATRIX STATUS: You're still plugged in\n")
         print(f"Current Python: {sys.executable}")
