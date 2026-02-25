@@ -7,9 +7,14 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 15:03:35 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/25 18:29:42 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/25 18:34:21 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
+"""
+Load and display secure configuration from environment variables
+and .env files using python-dotenv.
+"""
 
 import os
 import sys
