@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/26 03:06:03 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/26 03:44:04 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/26 03:47:06 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -37,3 +37,22 @@ def mage_stats(mages: list[dict]) -> dict:
         "min_power": min(mages, key=lambda x: x["power"])["power"],
         "avg_power": round(sum(powers) / len(mages), 2),
     }
+
+
+if __name__ == "__main__":
+    artifacts = [
+        {"name": "Crystal Orb", "power": 85, "type": "orb"},
+        {"name": "Fire Staff", "power": 92, "type": "staff"},
+    ]
+    sorted_art = artifact_sorter(artifacts)
+    print("\nTesting artifact sorter...")
+    print(
+        f"{sorted_art[0]['name']} ({sorted_art[0]['power']} power)"
+        f" comes before"
+        f" {sorted_art[1]['name']} ({sorted_art[1]['power']} power)"
+    )
+
+    spells = ["fireball", "heal", "shield"]
+    transformed = spell_transformer(spells)
+    print("\nTesting spell transformer...")
+    print(" ".join(transformed))
