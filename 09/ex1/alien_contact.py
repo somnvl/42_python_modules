@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 19:02:22 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/26 02:48:21 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/26 02:52:50 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -81,10 +81,10 @@ def main() -> None:
         print(f"ID: {contact.contact_id}")
         print(f"Type: {contact.contact_type}")
         print(f"Location: {contact.location}")
-        print(f"Signal: {contact.signal_strength}")
-        print(f"Duration: {contact.duration_minutes}")
+        print(f"Signal: {contact.signal_strength}/10")
+        print(f"Duration: {contact.duration_minutes} minutes")
         print(f"Witnesses: {contact.witness_count}")
-        print(f"Message: {contact.message_received}")
+        print(f"Message: '{contact.message_received}'")
 
     except ValidationError as e:
         print("Expected validation error:")
@@ -104,15 +104,6 @@ def main() -> None:
             witness_count=2,
             message_received="Greetings from Zeta Reticuli",
         )
-        print("Valid contact report:")
-        print(f"ID: {contact.contact_id}")
-        print(f"Type: {contact.contact_type}")
-        print(f"Location: {contact.location}")
-        print(f"Signal: {contact.signal_strength}")
-        print(f"Duration: {contact.duration_minutes}")
-        print(f"Witnesses: {contact.witness_count}")
-        print(f"Message: {contact.message_received}")
-
     except ValidationError as e:
         print("Expected validation error:")
         print(str(e.errors()[0]["ctx"]["error"]))

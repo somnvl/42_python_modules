@@ -7,7 +7,7 @@
 #   By: somenvie <somenvie@student.42.fr>            +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/02/25 19:02:24 by somenvie            #+#    #+#            #
-#   Updated: 2026/02/26 02:04:15 by somenvie           ###   ########.fr      #
+#   Updated: 2026/02/26 02:52:15 by somenvie           ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -61,7 +61,7 @@ def main() -> None:
     print("=" * 40)
 
     try:
-        bad = SpaceStation(
+        station = SpaceStation(
             station_id="ISS001",
             name="International Space Station",
             crew_size=25,
@@ -69,13 +69,6 @@ def main() -> None:
             oxygen_level=92.3,
             last_maintenance="2024-01-15T10:30:00",
         )
-        print(f"ID: {bad.station_id}")
-        print(f"Name: {bad.name}")
-        print(f"Crew: {bad.crew_size} people")
-        print(f"Power: {bad.power_level}%")
-        print(f"Oxygen: {bad.oxygen_level}%")
-        status = "Operational" if bad.is_operational else "Offline"
-        print(f"Status: {status}")
     except ValidationError as e:
         print("Expected validation error:")
         print(e.errors()[0]["msg"])
